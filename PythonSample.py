@@ -1,6 +1,0 @@
-print("-----------------")
-print("Python has entered the buliding.")
-print("Let the party start")
-print("Feature 2")
-print("Feature 3")
-print("Feature 44")
