@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "goit-web-hw-05"
 version = "0.1.0"
-description = ""
+description = "hw"
 authors = ["Oleksandr Tesler <tesler_2000@yahoo.com>"]
 readme = "README.md"
 
