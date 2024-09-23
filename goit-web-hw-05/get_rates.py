@@ -11,7 +11,7 @@ CURR2 = "EUR"
 
 class HttpError(Exception):
     pass
-
+pass
 
 async def request(url: str):
     async with aiohttp.ClientSession() as session:
