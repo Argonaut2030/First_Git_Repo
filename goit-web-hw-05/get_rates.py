@@ -59,5 +59,8 @@ async def main(index_day):
 if __name__ == "__main__":
     if sys.platform == "win32":
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    rates = asyncio.run(main(sys.argv[1]))
-    print(rates)
+    if int(sys.argv[1]) < 11:
+       rates = asyncio.run(main(sys.argv[1]))
+       print(rates)
+    else: 
+       print("Please enter the number of days in the range of 1 .. 10")
