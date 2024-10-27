@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "goit-web-hw-09"
+version = "0.1.0"
+description = ""
+authors = ["Oleksandr Tesler <tesler_2000@yahoo.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+lxml = "^5.3.0"
+requests = "^2.32.3"
+beautifulsoup4 = "^4.12.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
