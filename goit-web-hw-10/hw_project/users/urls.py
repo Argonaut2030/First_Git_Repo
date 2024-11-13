@@ -17,13 +17,21 @@
 # ]
 
 
-from django.urls import path
+from django.urls import path, include
 from . import views
+# from quotes import views
 
 app_name = 'users'
 
 urlpatterns = [
     path('signup/', views.signupuser, name='signup'),
+    path('login/', views.loginuser, name='login'),
+    # path('', views.main, name='index'),
+    path("", include("quotes.urls", namespace='root'))
 ]
+
+
+
+
 
 
