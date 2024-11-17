@@ -9,13 +9,13 @@
     {% for quote in quotes %}
     <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
         <span class="text" itemprop="text">{{quote.quote}}</span>
-        <span>by <small class="author" itemprop="author">{{quote.author|author}}</small>
-        <a href="/author/{{quote.author}}">(about)</a>
+        <span>by <small class="author" itemprop="author">{{quote.author}}</small>
+        <a href="/author_detail/{{quote.author.id}}">(about)</a>
         </span>
         <div class="tags">
             Tags:
-            {% for tag in quote.tags %}            
-            <a class="tag" href="/tag/{{tag}}">{{tag}}</a>
+            {% for tag in quote.tags.all %}            
+            <a class="tag" href="/tag/{{tag}}">{{tag.name}}</a>
             {% endfor %}
         </div>
     </div>

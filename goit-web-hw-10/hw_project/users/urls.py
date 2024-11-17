@@ -26,10 +26,9 @@ app_name = 'users'
 urlpatterns = [
     path('signup/', views.signupuser, name='signup'),
     path('login/', views.loginuser, name='login'),
-    # path('', views.main, name='index'),
-    path("", include("quotes.urls", namespace='root'))
+    path('logout/', views.logoutuser, name='logout'),
+    path('profile/', views.profile, name='profile'),
 ]
-
 
 
 
