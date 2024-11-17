@@ -1,18 +1,24 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import RegisterForm, LoginForm
+from django.contrib.auth.decorators import login_required
+from .forms import RegisterForm, LoginForm, ProfileForm
 
+from django.contrib.auth.models import User
+
+
+
+# from .models import Profile
 
 def signupuser(request):
     if request.user.is_authenticated:
-        return redirect(to='quotes:main')
+        return redirect('quotes:root')
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(to='quotes:main')
+            return redirect('quotes:root')
         else:
             return render(request, 'users/signup.html', context={"form": form})
 
@@ -23,7 +29,7 @@ def signupuser(request):
 
 def loginuser(request):
     if request.user.is_authenticated:
-        return redirect(to='quotes:main')
+        return redirect('quotes:root')
 
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
@@ -32,6 +38,43 @@ def loginuser(request):
             return redirect(to='users:login')
 
         login(request, user)
-        return redirect(to='quotes:main')
+        return redirect('quotes:root')
 
     return render(request, 'users/login.html', context={"form": LoginForm()})
+
+@login_required
+def logoutuser(request):
+    logout(request)
+    return redirect(to='quotes:root')
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='users:profile')
+
+    profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'users/profile.html', {'profile_form': profile_form})
+
+
+
+
+# @login_required
+# def profile(request):
+#     return render(request, 'users/profile.html')
+
+
+# @login_required
+# def profile_view(request, username):
+#     user = get_object_or_404(User, username=username)
+#     user_profile = Profile.objects.get(user=user)
+#     context = {
+#         'user': user,
+#         'profile': user_profile
+#     }
+#     return render(request, 'profiles/profile.html', context)
+
